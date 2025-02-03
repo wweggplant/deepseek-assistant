@@ -1,0 +1,55 @@
+name: Build Chrome Extension
+
+on:
+  push:
+    branches:
+      - main
+      - gh-actions-test
+    paths:
+      - 'apps/browser-extension/**'
+  pull_request:
+    paths:
+      - 'apps/browser-extension/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20]
+    defaults:
+      # 仅对 run 步骤生效，不影响 actions
+      run:
+        working-directory: apps/browser-extension
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Debug - List current directory (after install)
+        run: |
+          echo "当前工作目录: $(pwd)"
+          echo "目录内容："
+          ls -al
+
+      - name: Build extension
+        run: pnpm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deepseek-assistant
+          # 上传路径相对于仓库根目录
+          path: apps/browser-extension/dist

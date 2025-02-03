@@ -1,0 +1,20 @@
+{
+  "name": "deepseek-assistant",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"{apps/*,packages/*}\" dev",
+    "build": "pnpm --parallel --filter \"{apps/*,packages/*}\" build",
+    "lint": "pnpm --parallel --filter \"{apps/*,packages/*}\" lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
