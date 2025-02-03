@@ -1,0 +1,11 @@
+name = "deepseek-api"
+main = "src/index.ts"
+compatibility_date = "2025-02-04"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "deepseek-share"
+preview_bucket_name = "deepseek-share-dev"
+
+[vars]
+EXPIRY_DAYS = "7"
