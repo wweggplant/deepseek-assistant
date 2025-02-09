@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { nanoid } from 'nanoid'
 import { R2Bucket } from '@cloudflare/workers-types'
-
+import sanitizeHtml from './sanitiz'
 type Env = {
   BUCKET: R2Bucket
 }
@@ -19,9 +19,10 @@ app.use('*', cors({
 
 // 保存分享内容
 app.post('/share', async (c) => {
-  const { content, styles } = await c.req.json()
+  const { content: unsafeContent, styles } = await c.req.json()
   const id = nanoid(8)
-  
+  const content = sanitizeHtml(unsafeContent)
+  console.log(content, 'after sanitize content')
   await c.env.BUCKET.put(id, JSON.stringify({ content, styles }), {
     customMetadata: { createdAt: Date.now().toString() }
   })
