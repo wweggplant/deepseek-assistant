@@ -23,7 +23,8 @@ public/uploads
 # misc
 .DS_Store
 *.pem
-
+*.crx
+*.zip
 # debug
 npm-debug.log*
 yarn-debug.log*

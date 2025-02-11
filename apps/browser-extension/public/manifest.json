@@ -17,7 +17,6 @@
       "run_at": "document_end"
     }
   ],
-  "permissions": ["scripting"],
   "web_accessible_resources": [
     {
       "resources": [
