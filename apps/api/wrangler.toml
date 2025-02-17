@@ -9,3 +9,6 @@ preview_bucket_name = "deepseek-share-dev"
 
 [vars]
 EXPIRY_DAYS = "7"
+
+[observability.logs]
+enabled = true
